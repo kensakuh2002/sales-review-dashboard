@@ -38,8 +38,8 @@ header .meta{color:var(--muted);font-size:.82rem}
 .panel{display:none}.panel.on{display:block}
 .panel-inner{background:var(--card);border-radius:0 10px 10px 10px;padding:1rem;overflow-x:auto}
 .panel-inner h3{font-size:.9rem;margin-bottom:.6rem;color:var(--accent)}
-table{width:100%;border-collapse:collapse;font-size:.78rem}
-th,td{padding:.4rem .55rem;text-align:right;border-bottom:1px solid var(--border);white-space:nowrap}
+table{width:100%;border-collapse:collapse;font-size:.78rem;table-layout:fixed}
+th,td{padding:.4rem .35rem;text-align:right;border-bottom:1px solid var(--border);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 th{background:rgba(59,130,246,.08);color:var(--accent);font-weight:600;position:sticky;top:0;white-space:normal;line-height:1.2;padding:.4rem .4rem}
 th:first-child,td:first-child{text-align:left}
 td{padding:.4rem .4rem}
@@ -114,7 +114,7 @@ var L={
     copy:'📋 レポートコピー',reset:'🔄 リセット',done:'完了',
     name:'名称',w3:'3w前',w2:'2w前',w1:'1w前',thisW:'今週',
     avg4:'4w平均',wowH:'前週比',yr1:'1年前',yr4:'1年前\n4w平均',yoy:'YoY',
-    ytdH:'YTD',ytdYoy:'YTD\nYoY',trend:'推移',
+    ytdH:'YTD',avg4yoy:'4w\nYoY',ytdYoy:'YTD\nYoY',trend:'推移',
     online:'📡 オンライン比率',
     unit:'台',items:'件',
     product:'製品',retailer:'販売店',
@@ -148,7 +148,7 @@ var L={
     copy:'📋 Copy Report',reset:'🔄 Reset',done:'done',
     name:'Name',w3:'3w ago',w2:'2w ago',w1:'1w ago',thisW:'This\nWeek',
     avg4:'4w\nAvg',wowH:'WoW',yr1:'Last\nYear',yr4:'LY\n4w Avg',yoy:'YoY',
-    ytdH:'YTD',ytdYoy:'YTD\nYoY',trend:'Trend',
+    ytdH:'YTD',avg4yoy:'4w\nYoY',ytdYoy:'YTD\nYoY',trend:'Trend',
     online:'📡 Online Ratio',
     unit:' units',items:'',
     product:'Product',retailer:'Retailer',
@@ -169,22 +169,26 @@ function miniBars(arr){const mx=Math.max(...arr,1);return '<span class="mini-bar
 
 function makeTableRow(name,v4,a4,vYr4,aYr,ytd,ytdYr,cls,isHl){
   const now=v4[3],prev=v4[2],yrNow=vYr4[3];
-  const wow=pct(now,prev),yoy=pct(now,yrNow),ytdYoy=pct(ytd,ytdYr);
+  const wow=pct(now,prev),avg4yoy=pct(a4,aYr),ytdYoy=pct(ytd,ytdYr);
   const hlc=isHl?' class="hl"':'';
   return '<tr'+(cls?' class="'+cls+'"':'')+'><td>'+name+'</td>'
     +'<td>'+v4[0]+'</td><td>'+v4[1]+'</td><td>'+v4[2]+'</td>'
-    +'<td'+hlc+'>'+now+'</td><td>'+a4.toFixed(1)+'</td>'
+    +'<td'+hlc+'>'+now+'</td>'
     +'<td class="'+wow.c+'">'+wow.t+'</td>'
-    +'<td>'+yrNow+'</td><td>'+aYr.toFixed(1)+'</td>'
-    +'<td class="'+yoy.c+'">'+yoy.t+'</td>'
+    +'<td>'+yrNow+'</td><td>'+a4.toFixed(1)+'</td><td>'+aYr.toFixed(1)+'</td>'
+    +'<td class="'+avg4yoy.c+'">'+avg4yoy.t+'</td>'
     +'<td>'+fmt(ytd)+'</td><td class="'+ytdYoy.c+'">'+ytdYoy.t+'</td>'
     +'<td>'+miniBars(v4)+'</td></tr>';
 }
 
 function tableHeader(){
-  return '<table><thead><tr><th>'+t('name')+'</th><th>'+t('w3')+'</th><th>'+t('w2')+'</th><th>'+t('w1')+'</th>'
-    +'<th class="hl">'+t('thisW')+'</th><th>'+t('avg4')+'</th><th>'+t('wowH')+'</th>'
-    +'<th>'+t('yr1')+'</th><th>'+t('yr4')+'</th><th>'+t('yoy')+'</th>'
+  return '<table style="table-layout:fixed"><colgroup><col style="width:12%">'
+    +'<col style="width:6%"><col style="width:6%"><col style="width:6%"><col style="width:6%">'
+    +'<col style="width:6%"><col style="width:7%"><col style="width:7%"><col style="width:7%">'
+    +'<col style="width:7%"><col style="width:7%"><col style="width:7%"><col style="width:6%">'
+    +'</colgroup><thead><tr><th>'+t('name')+'</th><th>'+t('w3')+'</th><th>'+t('w2')+'</th><th>'+t('w1')+'</th>'
+    +'<th class="hl">'+t('thisW')+'</th><th>'+t('wowH')+'</th>'
+    +'<th>'+t('yr1')+'</th><th>'+t('avg4')+'</th><th>'+t('yr4')+'</th><th>'+t('avg4yoy')+'</th>'
     +'<th>'+t('ytdH')+'</th><th>'+t('ytdYoy')+'</th><th>'+t('trend')+'</th></tr></thead><tbody>';
 }
 
