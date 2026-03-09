@@ -40,8 +40,11 @@ header .meta{color:var(--muted);font-size:.82rem}
 .panel-inner h3{font-size:.9rem;margin-bottom:.6rem;color:var(--accent)}
 table{width:100%;border-collapse:collapse;font-size:.78rem}
 th,td{padding:.4rem .55rem;text-align:right;border-bottom:1px solid var(--border);white-space:nowrap}
-th{background:rgba(59,130,246,.08);color:var(--accent);font-weight:600;position:sticky;top:0}
+th{background:rgba(59,130,246,.08);color:var(--accent);font-weight:600;position:sticky;top:0;white-space:normal;line-height:1.2;padding:.4rem .4rem}
 th:first-child,td:first-child{text-align:left}
+td{padding:.4rem .4rem}
+.lang-btn{background:none;border:1px solid var(--border);color:var(--muted);padding:.25rem .5rem;border-radius:4px;cursor:pointer;font-size:.75rem;font-family:inherit;margin-left:.5rem}
+.lang-btn.on{background:var(--accent);color:#fff;border-color:var(--accent)}
 tr:hover td{background:rgba(255,255,255,.03)}
 tr.sub-row td{background:var(--highlight);font-weight:600}
 td.hl{background:rgba(59,130,246,.12);font-weight:700;border-left:2px solid var(--accent);border-right:2px solid var(--accent)}
@@ -86,6 +89,78 @@ const DATA = {"lastDate":"2026/03/02","dates12":["12/15","12/22","12/29","1/5","
 (function(){
 'use strict';
 
+var LANG='ja';
+var L={
+  ja:{
+    title:'📊 週次販売実績レビュー',
+    src:'ソース: JP Retail Sales Actual',
+    week:'対象週',
+    thisWeek:'今週 Net Sales',
+    avg4_8:'4週平均 / 8週平均',
+    avg8:'8w平均',
+    lastYr:'前年同期',
+    ytd:'YTD累計',
+    alerts:'🚨 アラート',
+    check:'要確認',
+    wow:'前週比',
+    chart:'📈 直近12週 Net Sales推移（前年同期比較）',
+    lgdThis:'今年',lgdLast:'前年',lgdAvg:'4w平均',
+    summary:'📦 全体サマリー（製品別）',
+    prodAnalysis:'🔍 製品別分析',
+    insights:'💡 今週の注目点',
+    alertTitle:'🚨 異常検出アラート',
+    checklist:'✅ 販売代理店確認チェックリスト',
+    dataOverview:'📋 データ概要',
+    copy:'📋 レポートコピー',reset:'🔄 リセット',done:'完了',
+    name:'名称',w3:'3w前',w2:'2w前',w1:'1w前',thisW:'今週',
+    avg4:'4w平均',wowH:'前週比',yr1:'1年前',yr4:'1年前\n4w平均',yoy:'YoY',
+    ytdH:'YTD',ytdYoy:'YTD\nYoY',trend:'推移',
+    online:'📡 オンライン比率',
+    unit:'台',items:'件',
+    product:'製品',retailer:'販売店',
+    noAlert:'✅ 異常なし',
+    resetConfirm:'チェックとメモをリセットしますか？',
+    copied:'📋 コピーしました！',
+    insightUp:'増加の内訳',insightDn:'減少',insightMain:'主な変動',
+    hi:'高',md:'中',lo:'低',total:'合計',netTotal:'Net Sales合計'
+  },
+  en:{
+    title:'📊 Weekly Sales Review',
+    src:'Source: JP Retail Sales Actual',
+    week:'Week',
+    update:'📂 Update Data',
+    thisWeek:'This Week Net Sales',
+    avg4_8:'4-Wk Avg / 8-Wk Avg',
+    avg8:'8w avg',
+    lastYr:'Last Year',
+    ytd:'YTD Total',
+    alerts:'🚨 Alerts',
+    check:'To Review',
+    wow:'WoW',
+    chart:'📈 12-Week Net Sales Trend (YoY Comparison)',
+    lgdThis:'This Year',lgdLast:'Last Year',lgdAvg:'4w Avg',
+    summary:'📦 Overall Summary (by Product)',
+    prodAnalysis:'🔍 Product Analysis',
+    insights:'💡 Key Highlights This Week',
+    alertTitle:'🚨 Anomaly Alerts',
+    checklist:'✅ Distributor Confirmation Checklist',
+    dataOverview:'📋 Data Overview',
+    copy:'📋 Copy Report',reset:'🔄 Reset',done:'done',
+    name:'Name',w3:'3w ago',w2:'2w ago',w1:'1w ago',thisW:'This\nWeek',
+    avg4:'4w\nAvg',wowH:'WoW',yr1:'Last\nYear',yr4:'LY\n4w Avg',yoy:'YoY',
+    ytdH:'YTD',ytdYoy:'YTD\nYoY',trend:'Trend',
+    online:'📡 Online Ratio',
+    unit:' units',items:'',
+    product:'Product',retailer:'Retailer',
+    noAlert:'✅ No anomalies detected',
+    resetConfirm:'Reset all checks and memos?',
+    copied:'📋 Copied!',
+    insightUp:'Increase breakdown',insightDn:'Decrease',insightMain:'Key changes',
+    hi:'High',md:'Med',lo:'Low',total:'Total',netTotal:'Net Sales Total'
+  }
+};
+function t(k){return L[LANG][k]||L['ja'][k]||k}
+
 function fmt(n){return n==null?'—':Number(n).toLocaleString('ja-JP')}
 function pct(now,prev){if(!prev||prev===0)return{t:'N/A',c:'fl'};const v=((now-prev)/Math.abs(prev)*100);return{t:(v>0?'+':'')+v.toFixed(0)+'%',c:v>5?'up':v<-5?'dn':'fl'}}
 function avg(arr){const f=arr.filter(v=>v!=null);return f.length?f.reduce((a,b)=>a+b,0)/f.length:0}
@@ -107,10 +182,10 @@ function makeTableRow(name,v4,a4,vYr4,aYr,ytd,ytdYr,cls,isHl){
 }
 
 function tableHeader(){
-  return '<table><thead><tr><th>名称</th><th>3w前</th><th>2w前</th><th>1w前</th>'
-    +'<th class="hl">今週</th><th>4w平均</th><th>前週比</th>'
-    +'<th>1年前</th><th>1年前4w平均</th><th>YoY</th>'
-    +'<th>YTD</th><th>YTD YoY</th><th>推移</th></tr></thead><tbody>';
+  return '<table><thead><tr><th>'+t('name')+'</th><th>'+t('w3')+'</th><th>'+t('w2')+'</th><th>'+t('w1')+'</th>'
+    +'<th class="hl">'+t('thisW')+'</th><th>'+t('avg4')+'</th><th>'+t('wowH')+'</th>'
+    +'<th>'+t('yr1')+'</th><th>'+t('yr4')+'</th><th>'+t('yoy')+'</th>'
+    +'<th>'+t('ytdH')+'</th><th>'+t('ytdYoy')+'</th><th>'+t('trend')+'</th></tr></thead><tbody>';
 }
 
 function detectAlerts(d){
@@ -215,28 +290,31 @@ function render(d){
   const ytdYoy=d.ytdNet&&d.ytdNetYr?pct(d.ytdNet,d.ytdNetYr):{t:'N/A',c:'fl'};
   const alerts=detectAlerts(d);
   const insights=generateInsights(d);
+  var u=t('unit');
 
-  let h='<header><div><h1>📊 週次販売実績レビュー</h1>'
-    +'<div class="meta">対象週: '+d.lastDate+' | ソース: JP Retail Sales Actual</div></div>'
+  let h='<header><div><h1>'+t('title')+'</h1>'
+    +'<div class="meta">'+t('week')+': '+d.lastDate+' | '+t('src')+'</div></div>'
+    +'<div><button class="lang-btn'+(LANG==='ja'?' on':'')+'" onclick="switchLang(\'ja\')">JP</button>'
+    +'<button class="lang-btn'+(LANG==='en'?' on':'')+'" onclick="switchLang(\'en\')">EN</button>'
 
   // Summary cards
   h+='<div class="cards">'
-    +'<div class="card"><div class="lbl">今週 Net Sales</div><div class="val">'+fmt(now)+'<span style="font-size:.65rem">台</span></div><div class="sub '+wow.c+'">前週比 '+wow.t+'</div></div>'
-    +'<div class="card g"><div class="lbl">4週平均 / 8週平均</div><div class="val">'+fmt(Math.round(a4))+'<span style="font-size:.65rem">台</span></div><div class="sub fl">8w: '+fmt(Math.round(a8))+'台</div></div>'
-    +'<div class="card p"><div class="lbl">前年同期</div><div class="val">'+fmt(yrNow)+'<span style="font-size:.65rem">台</span></div><div class="sub '+yoy.c+'">YoY '+yoy.t+'</div></div>'
-    +'<div class="card y"><div class="lbl">YTD累計</div><div class="val">'+fmt(d.ytdNet||0)+'<span style="font-size:.65rem">台</span></div><div class="sub '+ytdYoy.c+'">YTD YoY '+ytdYoy.t+'</div></div>'
-    +'<div class="card '+(alerts.length>5?'r':'y')+'"><div class="lbl">🚨 アラート</div><div class="val">'+alerts.length+'<span style="font-size:.65rem">件</span></div><div class="sub fl">要確認</div></div>'
+    +'<div class="card"><div class="lbl">'+t('thisWeek')+'</div><div class="val">'+fmt(now)+'<span style="font-size:.65rem">'+u+'</span></div><div class="sub '+wow.c+'">'+t('wow')+' '+wow.t+'</div></div>'
+    +'<div class="card g"><div class="lbl">'+t('avg4_8')+'</div><div class="val">'+fmt(Math.round(a4))+'<span style="font-size:.65rem">'+u+'</span></div><div class="sub fl">'+t('avg8')+': '+fmt(Math.round(a8))+u+'</div></div>'
+    +'<div class="card p"><div class="lbl">'+t('lastYr')+'</div><div class="val">'+fmt(yrNow)+'<span style="font-size:.65rem">'+u+'</span></div><div class="sub '+yoy.c+'">YoY '+yoy.t+'</div></div>'
+    +'<div class="card y"><div class="lbl">'+t('ytd')+'</div><div class="val">'+fmt(d.ytdNet||0)+'<span style="font-size:.65rem">'+u+'</span></div><div class="sub '+ytdYoy.c+'">YTD YoY '+ytdYoy.t+'</div></div>'
+    +'<div class="card '+(alerts.length>5?'r':'y')+'"><div class="lbl">'+t('alerts')+'</div><div class="val">'+alerts.length+'<span style="font-size:.65rem">'+t('items')+'</span></div><div class="sub fl">'+t('check')+'</div></div>'
     +'</div>';
 
   // Chart
-  h+='<div class="section"><h2>📈 直近12週 Net Sales推移（前年同期比較）</h2><div class="chart-wrap"><canvas id="chart"></canvas></div></div>';
+  h+='<div class="section"><h2>'+t('chart')+'</h2><div class="chart-wrap"><canvas id="chart"></canvas></div></div>';
 
   // Overall summary table
-  h+='<div class="section"><h2>📦 全体サマリー（製品別）</h2>';
+  h+='<div class="section"><h2>'+t('summary')+'</h2>';
   h+=tableHeader();
   // Net Sales total row
   var nsV4=ns.slice(8),nsA4=avg(nsV4),nsYr4=d.netYr12?d.netYr12.slice(8):[0,0,0,0],nsYrA=avg(nsYr4);
-  h+=makeTableRow('<strong>Net Sales合計</strong>',nsV4,nsA4,nsYr4,nsYrA,d.ytdNet||0,d.ytdNetYr||0,'sub-row',true);
+  h+=makeTableRow('<strong>'+t('netTotal')+'</strong>',nsV4,nsA4,nsYr4,nsYrA,d.ytdNet||0,d.ytdNetYr||0,'sub-row',true);
   // Each category
   d.categories.forEach(function(cat){
     h+=makeTableRow(cat.name,cat.sub4,avg(cat.sub4),cat.subYr4,avg(cat.subYr4),cat.ytd||0,cat.ytdYr||0,'',true);
@@ -251,7 +329,7 @@ function render(d){
   });
   var onYtd=0,allYtd=0;
   d.categories.forEach(function(cat){onYtd+=(cat.onlineYtd||0);allYtd+=(cat.ytd||0)});
-  h+='<tr class="online-row"><td>📡 オンライン比率</td>';
+  h+='<tr class="online-row"><td>'+t('online')+'</td>';
   for(var w=0;w<3;w++){var p=allTotal[w]?((onTotal[w]/allTotal[w])*100).toFixed(0)+'%':'—';h+='<td>'+p+'</td>';}
   var onNowPct=allTotal[3]?((onTotal[3]/allTotal[3])*100).toFixed(0)+'%':'—';
   var onAvgPct=(sum(allTotal))?((sum(onTotal)/sum(allTotal))*100).toFixed(0)+'%':'—';
@@ -261,17 +339,15 @@ function render(d){
 
   // Product tabs
   var biggest=d.categories.reduce(function(a,b){return avg(b.sub4)>avg(a.sub4)?b:a});
-  h+='<div class="section"><h2>🔍 製品別分析</h2><div class="tabs" id="tabBar">';
+  h+='<div class="section"><h2>'+t('prodAnalysis')+'</h2><div class="tabs" id="tabBar">';
   d.categories.forEach(function(c){h+='<button class="tab'+(c.name===biggest.name?' on':'')+'" data-t="'+c.name+'">'+c.name+'</button>';});
   h+='</div><div id="panels">';
   d.categories.forEach(function(cat){
     var cn=cat.sub4[3],cwow=pct(cn,cat.sub4[2]);
     h+='<div class="panel'+(cat.name===biggest.name?' on':'')+'" id="p-'+cat.name+'"><div class="panel-inner">';
-    h+='<h3>'+cat.name+' ('+cat.sku+') — 今週 <span style="font-size:1.2rem;font-weight:700">'+cn+'</span>台 <span class="'+cwow.c+'">'+cwow.t+'</span></h3>';
+    h+='<h3>'+cat.name+' ('+cat.sku+') — '+t('thisW').replace('\n',' ')+' <span style="font-size:1.2rem;font-weight:700">'+cn+'</span>'+u+' <span class="'+cwow.c+'">'+cwow.t+'</span></h3>';
     h+=tableHeader();
-    // Sub total
-    h+=makeTableRow('<strong>合計</strong>',cat.sub4,avg(cat.sub4),cat.subYr4,avg(cat.subYr4),cat.ytd||0,cat.ytdYr||0,'sub-row',true);
-    // Retailers
+    h+=makeTableRow('<strong>'+t('total')+'</strong>',cat.sub4,avg(cat.sub4),cat.subYr4,avg(cat.subYr4),cat.ytd||0,cat.ytdYr||0,'sub-row',true);
     cat.retailers.forEach(function(r){
       h+=makeTableRow(r.name,r.v4,avg(r.v4),r.vYr4,avg(r.vYr4),r.ytd||0,r.ytdYr||0,'',true);
     });
@@ -280,45 +356,43 @@ function render(d){
   h+='</div></div>';
 
   // Insights
-  h+='<div class="section"><h2 style="color:var(--accent)">💡 今週の注目点</h2>';
+  h+='<div class="section"><h2 style="color:var(--accent)">'+t('insights')+'</h2>';
   insights.forEach(function(i){h+='<div class="insight-item '+i.c+'">'+i.t+'</div>';});
   h+='</div>';
 
   // Alerts
-  h+='<div class="section"><h2 style="color:var(--warning)">🚨 異常検出アラート（'+alerts.length+'件）</h2><ul class="alert-list">';
-  if(alerts.length===0) h+='<li style="color:var(--success)">✅ 異常なし</li>';
+  h+='<div class="section"><h2 style="color:var(--warning)">'+t('alertTitle')+' ('+alerts.length+')</h2><ul class="alert-list">';
+  if(alerts.length===0) h+='<li style="color:var(--success)">'+t('noAlert')+'</li>';
   else alerts.forEach(function(a){
     h+='<li class="alert-item '+a.lv+'">'+(a.lv==='hi'?'🔴':a.lv==='md'?'🟡':'🟢')+' <strong>'+a.prod+' '+a.ret+'</strong>: '+a.msg+'</li>';
   });
   h+='</ul></div>';
 
   // Checklist
-  h+='<div class="two-col"><div class="section"><h2 style="color:var(--accent2)">✅ 販売代理店確認チェックリスト</h2><div id="chklist">';
+  h+='<div class="two-col"><div class="section"><h2 style="color:var(--accent2)">'+t('checklist')+'</h2><div id="chklist">';
   alerts.forEach(function(a,i){
-    h+='<div class="chk-item" id="ci-'+i+'"><input type="checkbox" id="chk-'+i+'"><span class="badge '+(a.lv==='hi'?'hi':a.lv==='md'?'md':'lo')+'">'+(a.lv==='hi'?'高':a.lv==='md'?'中':'低')+'</span><label for="chk-'+i+'"><strong>'+a.ret+'</strong>: '+a.prod+' '+a.msg+'</label><input type="text" placeholder="メモ..." id="memo-'+i+'"></div>';
+    h+='<div class="chk-item" id="ci-'+i+'"><input type="checkbox" id="chk-'+i+'"><span class="badge '+(a.lv==='hi'?'hi':a.lv==='md'?'md':'lo')+'">'+t(a.lv)+'</span><label for="chk-'+i+'"><strong>'+a.ret+'</strong>: '+a.prod+' '+a.msg+'</label><input type="text" placeholder="メモ..." id="memo-'+i+'"></div>';
   });
   h+='</div><div style="margin-top:.6rem;display:flex;gap:.5rem;flex-wrap:wrap">'
-    +'<button class="btn btn-primary" id="btnCopy">📋 レポートコピー</button>'
-    +'<button class="btn" id="btnReset">🔄 リセット</button></div>'
-    +'<div style="margin-top:.4rem;font-size:.72rem;color:var(--muted)"><span id="prog">0/'+alerts.length+' 完了</span><div class="pbar"><div class="pbar-fill" id="pbar" style="width:0%"></div></div></div></div>';
+    +'<button class="btn btn-primary" id="btnCopy">'+t('copy')+'</button>'
+    +'<button class="btn" id="btnReset">'+t('reset')+'</button></div>'
+    +'<div style="margin-top:.4rem;font-size:.72rem;color:var(--muted)"><span id="prog">0/'+alerts.length+' '+t('done')+'</span><div class="pbar"><div class="pbar-fill" id="pbar" style="width:0%"></div></div></div></div>';
 
   // Data summary
-  h+='<div class="section"><h2>📋 データ概要</h2><div style="font-size:.8rem;line-height:1.8;color:var(--muted)">'
-    +'📅 対象週: '+d.lastDate+'<br>📦 製品: '+d.categories.length+'カテゴリ<br>'
-    +'🏪 販売店: '+d.categories.reduce(function(s,c){return s+c.retailers.length},0)+'件<br>'
-    +'⚠️ アラート: '+alerts.length+'件<br>'
-    +'📈 今週Net Sales: '+now+'台（前週比'+wow.t+'）<br>'
-    +'📅 YTD: '+fmt(d.ytdNet||0)+'台（YoY '+ytdYoy.t+'）'
+  h+='<div class="section"><h2>'+t('dataOverview')+'</h2><div style="font-size:.8rem;line-height:1.8;color:var(--muted)">'
+    +'📅 '+t('week')+': '+d.lastDate+'<br>📦 '+t('product')+': '+d.categories.length+'<br>'
+    +'🏪 '+t('retailer')+': '+d.categories.reduce(function(s,c){return s+c.retailers.length},0)+'<br>'
+    +'⚠️ '+t('alerts')+': '+alerts.length+'<br>'
+    +'📈 Net Sales: '+now+u+' ('+t('wow')+' '+wow.t+')<br>'
+    +'📅 YTD: '+fmt(d.ytdNet||0)+u+' (YoY '+ytdYoy.t+')'
     +'</div></div></div>';
 
   document.getElementById('app').innerHTML=h;
-
-  // Draw chart with YoY line
   drawChart(d.dates12,d.net12,d.netYr12);
 
   // Tab switching
   document.querySelectorAll('.tab').forEach(function(b){b.addEventListener('click',function(){
-    document.querySelectorAll('.tab').forEach(function(t){t.classList.toggle('on',t===b)});
+    document.querySelectorAll('.tab').forEach(function(tb){tb.classList.toggle('on',tb===b)});
     document.querySelectorAll('.panel').forEach(function(p){p.classList.toggle('on',p.id==='p-'+b.dataset.t)});
   })});
 
@@ -336,28 +410,27 @@ function render(d){
   function save(){try{localStorage.setItem(sk,JSON.stringify(sv))}catch(e){}}
   function upProg(){
     var done=alerts.filter(function(_,i){return sv['c'+i]}).length;
-    document.getElementById('prog').textContent=done+'/'+alerts.length+' 完了';
+    document.getElementById('prog').textContent=done+'/'+alerts.length+' '+t('done');
     document.getElementById('pbar').style.width=(done/Math.max(alerts.length,1)*100)+'%';
   }
   upProg();
 
-  // Copy report
   document.getElementById('btnCopy').addEventListener('click',function(){
-    var txt='週次販売レビュー '+d.lastDate+'週\n\n■ 注目点\n';
-    insights.forEach(function(i){txt+=i.t+'\n'});
-    txt+='\n■ 確認事項\n';
+    var txt=t('title')+' '+d.lastDate+'\n\n';
+    insights.forEach(function(i){txt+=i.t.replace(/<[^>]*>/g,'')+'\n'});
+    txt+='\n';
     alerts.forEach(function(a,i){
-      txt+='['+(sv['c'+i]?'✓':'☐')+'] ['+(a.lv==='hi'?'高':a.lv==='md'?'中':'低')+'] '+a.prod+' '+a.ret+': '+a.msg;
+      txt+='['+(sv['c'+i]?'✓':'☐')+'] ['+t(a.lv)+'] '+a.prod+' '+a.ret+': '+a.msg;
       if(sv['m'+i])txt+=' → '+sv['m'+i];
       txt+='\n';
     });
     navigator.clipboard.writeText(txt).then(function(){
-      var t=document.getElementById('toast');t.style.display='block';setTimeout(function(){t.style.display='none'},2000);
+      var toast=document.getElementById('toast');toast.textContent=t('copied');toast.style.display='block';setTimeout(function(){toast.style.display='none'},2000);
     });
   });
 
   document.getElementById('btnReset').addEventListener('click',function(){
-    if(!confirm('チェックとメモをリセットしますか？'))return;
+    if(!confirm(t('resetConfirm')))return;
     sv={};save();alerts.forEach(function(_,i){
       var cb=document.getElementById('chk-'+i),me=document.getElementById('memo-'+i),ci=document.getElementById('ci-'+i);
       if(cb)cb.checked=false;if(me)me.value='';if(ci)ci.classList.remove('done');
@@ -404,13 +477,15 @@ function drawChart(labels,data,dataYr){
   data.forEach(function(v,i){var x=pad.left+sx*i,y=pad.top+ch-((v-mn)/rng)*ch;ctx.beginPath();ctx.arc(x,y,3.5,0,Math.PI*2);ctx.fillStyle=i===data.length-1?'#f59e0b':'#3b82f6';ctx.fill();ctx.strokeStyle='#0f172a';ctx.lineWidth=1.5;ctx.stroke()});
   // Last value
   var lx=pad.left+sx*(data.length-1),ly=pad.top+ch-((data[data.length-1]-mn)/rng)*ch;
-  ctx.fillStyle='#f59e0b';ctx.font='bold 11px system-ui';ctx.textAlign='center';ctx.fillText(data[data.length-1]+'台',lx,ly-10);
+  ctx.fillStyle='#f59e0b';ctx.font='bold 11px system-ui';ctx.textAlign='center';ctx.fillText(data[data.length-1]+t('unit'),lx,ly-10);
   // Legend
   ctx.font='9px system-ui';ctx.textAlign='right';
-  ctx.fillStyle='#3b82f6';ctx.fillText('● 今年',w-pad.right-120,pad.top-6);
-  ctx.fillStyle='#94a3b8';ctx.fillText('--- 前年',w-pad.right-60,pad.top-6);
-  ctx.fillStyle='#f59e0b';ctx.fillText('--- 4w平均',w-pad.right,pad.top-6);
+  ctx.fillStyle='#3b82f6';ctx.fillText('● '+t('lgdThis'),w-pad.right-120,pad.top-6);
+  ctx.fillStyle='#94a3b8';ctx.fillText('--- '+t('lgdLast'),w-pad.right-60,pad.top-6);
+  ctx.fillStyle='#f59e0b';ctx.fillText('--- '+t('lgdAvg'),w-pad.right,pad.top-6);
 }
+
+window.switchLang=function(lang){LANG=lang;render(DATA)};
 
 render(DATA);
 })();
