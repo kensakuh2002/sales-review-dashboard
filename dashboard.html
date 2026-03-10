@@ -85,7 +85,7 @@ th.hl{background:rgba(59,130,246,.2);border-left:2px solid var(--accent);border-
 <div id="app" style="background:#0f172a;min-height:100vh"></div>
 <div class="copy-toast" id="toast">📋 コピーしました！</div>
 <script>
-const DATA = {"lastDate":"2026/03/02","dates12":["12/15","12/22","12/29","1/5","1/12","1/19","1/26","2/2","2/9","2/16","2/23","3/2"],"net12":[320,198,97,384,357,322,399,363,235,273,446,354],"netYr12":[219,109,94,258,221,164,136,792,1270,409,116,231],"netYr4":[1270,409,116,231],"ytdNet":3133,"ytdNetYr":3597,"categories":[{"name":"R12d","sku":"A-SKU-0798","sub4":[135,139,206,153],"subYr4":[112,130,80,175],"sub8":[171,163,130,147,135,139,206,153],"subYr8":[178,111,73,137,112,130,80,175],"ytd":1386,"ytdYr":1128,"online4":[112,122,178,116],"retailers":[{"name":"Amazon","v4":[106,119,140,115],"vYr4":[92,96,56,128],"v8":[132,119,105,122,106,119,140,115],"ytd":1065,"ytdYr":790},{"name":"Bic camera","v4":[14,8,18,20],"vYr4":[15,20,10,24],"v8":[27,22,18,12,14,8,18,20],"ytd":164,"ytdYr":193},{"name":"Yodobashi camera","v4":[9,8,8,10],"vYr4":[5,8,8,11],"v8":[8,5,2,7,9,8,8,10],"ytd":60,"ytdYr":73},{"name":"Yamada Denki","v4":[1,2,6,1],"vYr4":[0,3,1,3],"v8":[3,3,1,6,1,2,6,1],"ytd":25,"ytdYr":38},{"name":"Edion","v4":[2,1,0,2],"vYr4":[0,0,0,0],"v8":[1,0,3,0,2,1,0,2],"ytd":13,"ytdYr":0},{"name":"Joshin","v4":[2,1,0,4],"vYr4":[0,0,0,0],"v8":[0,1,1,0,2,1,0,4],"ytd":10,"ytdYr":0},{"name":"ASKUL","v4":[1,0,0,1],"vYr4":[0,3,0,3],"v8":[0,0,0,0,1,0,0,1],"ytd":2,"ytdYr":7},{"name":"MonotaRO","v4":[0,0,34,0],"vYr4":[0,0,0,6],"v8":[0,13,0,0,0,0,34,0],"ytd":47,"ytdYr":13},{"name":"Busicom/Other","v4":[0,0,0,0],"vYr4":[0,0,5,0],"v8":[0,0,0,0,0,0,0,0],"ytd":0,"ytdYr":10}],"onlineYr4":[93,103,57,140],"onlineYtd":1132,"onlineYtdYr":836},{"name":"X2","sku":"A-SKU-0643","sub4":[13,6,8,12],"subYr4":[27,17,14,11],"sub8":[11,13,11,14,13,6,8,12],"subYr8":[5,3,3,26,27,17,14,11],"ytd":95,"ytdYr":112,"online4":[9,2,7,10],"retailers":[{"name":"Amazon","v4":[9,2,7,10],"vYr4":[6,9,9,8],"v8":[9,7,8,14,9,2,7,10],"ytd":67,"ytdYr":41},{"name":"Bic camera","v4":[0,0,0,0],"vYr4":[1,1,3,0],"v8":[1,1,1,0,0,0,0,0],"ytd":3,"ytdYr":10},{"name":"Yodobashi camera","v4":[0,0,0,1],"vYr4":[0,1,0,1],"v8":[0,2,1,0,0,0,0,1],"ytd":5,"ytdYr":3},{"name":"Yamada Denki","v4":[0,1,0,0],"vYr4":[0,0,0,1],"v8":[0,0,0,0,0,1,0,0],"ytd":1,"ytdYr":2},{"name":"Edion","v4":[0,0,0,1],"vYr4":[0,0,0,0],"v8":[0,0,0,0,0,0,0,1],"ytd":1,"ytdYr":0},{"name":"Costco","v4":[4,3,1,0],"vYr4":[20,6,2,1],"v8":[1,3,1,0,4,3,1,0],"ytd":14,"ytdYr":55}],"onlineYr4":[6,9,9,9],"onlineYtd":68,"onlineYtdYr":44},{"name":"S3b","sku":"A-SKU-0842","sub4":[4,18,3,6],"subYr4":[11,9,3,1],"sub8":[5,1,8,7,4,18,3,6],"subYr8":[6,1,1,7,11,9,3,1],"ytd":54,"ytdYr":42,"online4":[3,17,3,5],"retailers":[{"name":"Amazon","v4":[3,15,3,5],"vYr4":[8,5,2,1],"v8":[5,1,7,7,3,15,3,5],"ytd":48,"ytdYr":33},{"name":"Yamada Denki","v4":[1,0,0,1],"vYr4":[0,0,0,1],"v8":[0,0,0,0,1,0,0,1],"ytd":2,"ytdYr":1},{"name":"Edion","v4":[0,1,0,0],"vYr4":[0,0,0,0],"v8":[0,0,0,0,0,1,0,0],"ytd":1,"ytdYr":0},{"name":"ASKUL","v4":[0,2,0,0],"vYr4":[3,4,0,0],"v8":[0,0,0,0,0,2,0,0],"ytd":2,"ytdYr":7},{"name":"MonotaRO","v4":[0,0,0,0],"vYr4":[0,0,1,0],"v8":[0,0,0,0,0,0,0,0],"ytd":0,"ytdYr":1}],"onlineYr4":[11,10,3,1],"onlineYtd":51,"onlineYtdYr":43},{"name":"T2","sku":"A-SKU-0609","sub4":[80,108,214,175],"subYr4":[1158,279,36,57],"sub8":[164,129,246,206,80,108,214,175],"subYr8":[43,53,63,655,1158,279,36,57],"ytd":1533,"ytdYr":2469,"online4":[30,31,118,124],"retailers":[{"name":"Amazon","v4":[-1,0,0,0],"vYr4":[8,1,2,10],"v8":[18,20,37,1,-1,0,0,0],"ytd":125,"ytdYr":283},{"name":"Amazon","v4":[26,25,109,107],"vYr4":[0,0,0,0],"v8":[13,16,17,62,26,25,109,107],"ytd":390,"ytdYr":0},{"name":"Bic camera","v4":[4,12,16,12],"vYr4":[4,5,5,16],"v8":[14,19,19,9,4,12,16,12],"ytd":113,"ytdYr":61},{"name":"Yodobashi camera","v4":[7,11,18,25],"vYr4":[5,7,7,18],"v8":[3,8,11,6,7,11,18,25],"ytd":95,"ytdYr":68},{"name":"Yamada Denki","v4":[4,3,3,4],"vYr4":[0,0,1,3],"v8":[3,1,4,3,4,3,3,4],"ytd":26,"ytdYr":21},{"name":"Edion","v4":[0,0,1,2],"vYr4":[0,0,0,0],"v8":[0,0,0,0,0,0,1,2],"ytd":3,"ytdYr":0},{"name":"Joshin","v4":[0,0,0,3],"vYr4":[0,0,0,0],"v8":[0,0,0,0,0,0,0,3],"ytd":3,"ytdYr":0},{"name":"ASKUL","v4":[0,3,1,0],"vYr4":[0,0,0,0],"v8":[0,0,0,0,0,3,1,0],"ytd":4,"ytdYr":4},{"name":"MonotaRO","v4":[4,0,0,0],"vYr4":[0,0,3,0],"v8":[0,0,0,0,4,0,0,0],"ytd":4,"ytdYr":6},{"name":"Costco","v4":[36,54,66,22],"vYr4":[1141,266,18,10],"v8":[113,41,158,120,36,54,66,22],"ytd":735,"ytdYr":2026}],"onlineYr4":[9,3,5,14],"onlineYtd":562,"onlineYtdYr":313},{"name":"T3","sku":"A-SKU-0880","sub4":[7,9,9,6],"subYr4":[0,0,0,0],"sub8":[9,9,9,3,7,9,9,6],"subYr8":[0,0,0,0,0,0,0,0],"ytd":74,"ytdYr":0,"online4":[3,6,5,3],"retailers":[{"name":"Amazon","v4":[3,6,3,3],"vYr4":[0,0,0,0],"v8":[7,3,2,3,3,6,3,3],"ytd":39,"ytdYr":0},{"name":"Bic camera","v4":[1,2,4,2],"vYr4":[0,0,0,0],"v8":[2,3,3,0,1,2,4,2],"ytd":18,"ytdYr":0},{"name":"Yodobashi camera","v4":[1,0,0,0],"vYr4":[0,0,0,0],"v8":[0,0,2,0,1,0,0,0],"ytd":3,"ytdYr":0},{"name":"Edion","v4":[2,0,0,0],"vYr4":[0,0,0,0],"v8":[0,1,0,0,2,0,0,0],"ytd":4,"ytdYr":0},{"name":"Joshin","v4":[0,1,0,1],"vYr4":[0,0,0,0],"v8":[0,0,0,0,0,1,0,1],"ytd":2,"ytdYr":0},{"name":"MonotaRO","v4":[0,0,2,0],"vYr4":[0,0,0,0],"v8":[0,1,2,0,0,0,2,0],"ytd":5,"ytdYr":0}],"onlineYr4":[0,0,0,0],"onlineYtd":45,"onlineYtdYr":0}]};
+const DATA = {"lastDate":"2026/03/02","dates12":["12/15","12/22","12/29","1/5","1/12","1/19","1/26","2/2","2/9","2/16","2/23","3/2"],"net12":[320,198,97,384,357,322,399,363,235,273,446,354],"netYr12":[219,109,94,258,221,164,136,792,1270,409,116,231],"netYr4":[1270,409,116,231],"ytdNet":3133,"ytdNetYr":3597,"categories":[{"name":"R12d","sku":"A-SKU-0798","sub4":[135,139,206,153],"subYr4":[112,130,80,175],"sub8":[171,163,130,147,135,139,206,153],"subYr8":[178,111,73,137,112,130,80,175],"ytd":1386,"ytdYr":1128,"online4":[112,122,178,116],"retailers":[{"name":"Amazon","v4":[106,119,140,115],"vYr4":[92,96,56,128],"v8":[132,119,105,122,106,119,140,115],"ytd":1065,"ytdYr":790,"v26":[146,153,131,112,108,145,118,106,119,114,120,106,173,117,133,86,53,107,132,119,105,122,106,119,140,115],"vYr26":[121,99,84,23,199,96,122,113,95,84,138,126,127,153,116,40,35,89,127,61,35,106,92,96,56,128]},{"name":"Bic camera","v4":[14,8,18,20],"vYr4":[15,20,10,24],"v8":[27,22,18,12,14,8,18,20],"ytd":164,"ytdYr":193,"v26":[24,22,31,22,22,19,13,33,25,21,22,20,34,27,29,12,6,25,27,22,18,12,14,8,18,20],"vYr26":[20,21,14,26,70,69,22,10,52,29,36,27,38,27,27,14,10,26,21,28,31,18,15,20,10,24]},{"name":"Yodobashi camera","v4":[9,8,8,10],"vYr4":[5,8,8,11],"v8":[8,5,2,7,9,8,8,10],"ytd":60,"ytdYr":73,"v26":[15,12,11,15,13,8,19,12,12,18,7,10,16,7,8,2,4,3,8,5,2,7,9,8,8,10],"vYr26":[8,13,10,17,11,13,9,10,10,13,16,11,30,9,12,20,7,11,4,10,6,10,5,8,8,11]},{"name":"Yamada Denki","v4":[1,2,6,1],"vYr4":[0,3,1,3],"v8":[3,3,1,6,1,2,6,1],"ytd":25,"ytdYr":38,"v26":[3,4,1,5,2,4,2,4,3,3,6,2,2,2,2,1,2,2,3,3,1,6,1,2,6,1],"vYr26":[2,3,6,4,10,1,4,5,1,5,2,1,0,0,3,0,0,1,26,0,1,3,0,3,1,3]},{"name":"Edion","v4":[2,1,0,2],"vYr4":[0,0,0,0],"v8":[1,0,3,0,2,1,0,2],"ytd":13,"ytdYr":0,"v26":[0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,3,0,4,1,0,3,0,2,1,0,2],"vYr26":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]},{"name":"Joshin","v4":[2,1,0,4],"vYr4":[0,0,0,0],"v8":[0,1,1,0,2,1,0,4],"ytd":10,"ytdYr":0,"v26":[0,0,0,0,2,2,0,1,1,1,2,0,1,0,1,1,0,1,0,1,1,0,2,1,0,4],"vYr26":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]},{"name":"ASKUL","v4":[1,0,0,1],"vYr4":[0,3,0,3],"v8":[0,0,0,0,1,0,0,1],"ytd":2,"ytdYr":7,"v26":[0,2,0,0,2,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1],"vYr26":[0,0,0,0,0,1,0,0,1,3,0,0,0,0,0,0,0,0,0,1,0,0,0,3,0,3]},{"name":"MonotaRO","v4":[0,0,34,0],"vYr4":[0,0,0,6],"v8":[0,13,0,0,0,0,34,0],"ytd":47,"ytdYr":13,"v26":[6,0,0,0,0,6,0,0,0,0,0,0,6,0,0,0,0,0,0,13,0,0,0,0,34,0],"vYr26":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,0,0,0,0,0,6]},{"name":"Busicom/Other","v4":[0,0,0,0],"vYr4":[0,0,5,0],"v8":[0,0,0,0,0,0,0,0],"ytd":0,"ytdYr":10,"v26":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"vYr26":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,5,0]}],"onlineYr4":[93,103,57,140],"onlineYtd":1132,"onlineYtdYr":836,"sub26":[194,193,174,154,149,187,152,156,160,157,158,138,233,153,173,105,65,142,171,163,130,147,135,139,206,153],"subYr26":[151,136,114,70,290,180,157,138,159,134,192,165,196,189,158,74,52,132,178,111,73,137,112,130,80,175]},{"name":"X2","sku":"A-SKU-0643","sub4":[13,6,8,12],"subYr4":[27,17,14,11],"sub8":[11,13,11,14,13,6,8,12],"subYr8":[5,3,3,26,27,17,14,11],"ytd":95,"ytdYr":112,"online4":[9,2,7,10],"retailers":[{"name":"Amazon","v4":[9,2,7,10],"vYr4":[6,9,9,8],"v8":[9,7,8,14,9,2,7,10],"ytd":67,"ytdYr":41,"v26":[1,4,4,1,5,6,6,6,11,5,7,3,3,0,0,0,0,1,9,7,8,14,9,2,7,10],"vYr26":[1,2,1,0,2,1,0,2,1,4,9,13,4,0,1,0,0,0,1,2,1,5,6,9,9,8]},{"name":"Bic camera","v4":[0,0,0,0],"vYr4":[1,1,3,0],"v8":[1,1,1,0,0,0,0,0],"ytd":3,"ytdYr":10,"v26":[3,1,1,0,0,0,2,1,1,0,0,1,2,0,1,0,0,0,1,1,1,0,0,0,0,0],"vYr26":[0,1,0,1,0,0,0,1,0,0,2,0,0,1,1,0,0,1,3,0,0,1,1,1,3,0]},{"name":"Yodobashi camera","v4":[0,0,0,1],"vYr4":[0,1,0,1],"v8":[0,2,1,0,0,0,0,1],"ytd":5,"ytdYr":3,"v26":[0,0,0,2,1,0,0,0,0,2,2,0,0,0,0,1,2,1,0,2,1,0,0,0,0,1],"vYr26":[0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,1]},{"name":"Yamada Denki","v4":[0,1,0,0],"vYr4":[0,0,0,1],"v8":[0,0,0,0,0,1,0,0],"ytd":1,"ytdYr":2,"v26":[0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0],"vYr26":[0,0,0,1,0,1,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1]},{"name":"Edion","v4":[0,0,0,1],"vYr4":[0,0,0,0],"v8":[0,0,0,0,0,0,0,1],"ytd":1,"ytdYr":0,"v26":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],"vYr26":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]},{"name":"Costco","v4":[4,3,1,0],"vYr4":[20,6,2,1],"v8":[1,3,1,0,4,3,1,0],"ytd":14,"ytdYr":55,"v26":[3,1,2,5,11,52,5,2,0,6,51,2,2,0,2,10,2,1,1,3,1,0,4,3,1,0],"vYr26":[9,10,10,1,3,1,0,4,1,4,14,20,7,4,5,0,1,4,0,1,2,19,20,6,2,1]}],"onlineYr4":[6,9,9,9],"onlineYtd":68,"onlineYtdYr":44,"sub26":[7,6,7,9,17,59,13,9,12,13,60,8,7,0,3,11,4,7,11,13,11,14,13,6,8,12],"subYr26":[10,14,11,4,5,3,0,8,2,8,25,33,11,5,7,0,1,6,5,3,3,26,27,17,14,11]},{"name":"S3b","sku":"A-SKU-0842","sub4":[4,18,3,6],"subYr4":[11,9,3,1],"sub8":[5,1,8,7,4,18,3,6],"subYr8":[6,1,1,7,11,9,3,1],"ytd":54,"ytdYr":42,"online4":[3,17,3,5],"retailers":[{"name":"Amazon","v4":[3,15,3,5],"vYr4":[8,5,2,1],"v8":[5,1,7,7,3,15,3,5],"ytd":48,"ytdYr":33,"v26":[1,2,4,2,2,4,3,3,6,10,10,3,3,3,4,4,0,2,5,1,7,7,3,15,3,5],"vYr26":[2,3,1,0,2,1,1,1,1,2,2,3,4,1,1,0,0,2,6,1,1,7,8,5,2,1]},{"name":"Yamada Denki","v4":[1,0,0,1],"vYr4":[0,0,0,1],"v8":[0,0,0,0,1,0,0,1],"ytd":2,"ytdYr":1,"v26":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1],"vYr26":[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1]},{"name":"Edion","v4":[0,1,0,0],"vYr4":[0,0,0,0],"v8":[0,0,0,0,0,1,0,0],"ytd":1,"ytdYr":0,"v26":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0],"vYr26":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]},{"name":"ASKUL","v4":[0,2,0,0],"vYr4":[3,4,0,0],"v8":[0,0,0,0,0,2,0,0],"ytd":2,"ytdYr":7,"v26":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0],"vYr26":[0,0,1,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,4,0,0]},{"name":"MonotaRO","v4":[0,0,0,0],"vYr4":[0,0,1,0],"v8":[0,0,0,0,0,0,0,0],"ytd":0,"ytdYr":1,"v26":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"vYr26":[0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0]}],"onlineYr4":[11,10,3,1],"onlineYtd":51,"onlineYtdYr":43,"sub26":[1,3,4,2,2,4,4,3,6,10,10,3,3,4,5,4,0,2,5,1,8,7,4,18,3,6],"subYr26":[4,3,3,0,3,4,1,1,1,2,2,3,6,2,2,0,0,3,6,1,1,7,11,9,3,1]},{"name":"T2","sku":"A-SKU-0609","sub4":[80,108,214,175],"subYr4":[1158,279,36,57],"sub8":[164,129,246,206,80,108,214,175],"subYr8":[43,53,63,655,1158,279,36,57],"ytd":1533,"ytdYr":2469,"online4":[30,31,118,124],"retailers":[{"name":"Amazon","v4":[-1,0,0,0],"vYr4":[8,1,2,10],"v8":[18,20,37,1,-1,0,0,0],"ytd":125,"ytdYr":283,"v26":[95,57,60,81,122,101,8,51,64,113,104,9,0,12,0,11,0,50,18,20,37,1,-1,0,0,0],"vYr26":[49,75,85,20,118,94,76,61,64,82,200,198,272,78,43,18,24,87,13,32,27,103,8,1,2,10]},{"name":"Amazon","v4":[26,25,109,107],"vYr4":[0,0,0,0],"v8":[13,16,17,62,26,25,109,107],"ytd":390,"ytdYr":0,"v26":[95,57,60,81,122,101,8,51,64,113,104,9,0,12,0,11,0,50,18,20,37,1,-1,0,0,0],"vYr26":[49,75,85,20,118,94,76,61,64,82,200,198,272,78,43,18,24,87,13,32,27,103,8,1,2,10]},{"name":"Bic camera","v4":[4,12,16,12],"vYr4":[4,5,5,16],"v8":[14,19,19,9,4,12,16,12],"ytd":113,"ytdYr":61,"v26":[7,10,7,10,9,18,5,5,16,14,13,7,33,10,16,7,9,8,14,19,19,9,4,12,16,12],"vYr26":[2,0,4,2,3,3,3,1,1,1,5,0,2,3,1,2,5,6,8,5,5,7,4,5,5,16]},{"name":"Yodobashi camera","v4":[7,11,18,25],"vYr4":[5,7,7,18],"v8":[3,8,11,6,7,11,18,25],"ytd":95,"ytdYr":68,"v26":[4,9,11,19,17,7,5,5,10,17,6,9,16,4,13,10,7,6,3,8,11,6,7,11,18,25],"vYr26":[5,17,9,18,13,7,11,7,6,6,6,7,15,9,7,10,3,10,7,6,5,3,5,7,7,18]},{"name":"Yamada Denki","v4":[4,3,3,4],"vYr4":[0,0,1,3],"v8":[3,1,4,3,4,3,3,4],"ytd":26,"ytdYr":21,"v26":[1,1,2,1,2,3,0,3,2,3,1,4,3,0,1,6,0,1,3,1,4,3,4,3,3,4],"vYr26":[0,0,2,1,1,0,0,0,0,0,0,2,1,0,0,0,0,3,0,1,1,12,0,0,1,3]},{"name":"Edion","v4":[0,0,1,2],"vYr4":[0,0,0,0],"v8":[0,0,0,0,0,0,1,2],"ytd":3,"ytdYr":0,"v26":[0,0,0,0,0,1,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2],"vYr26":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]},{"name":"Joshin","v4":[0,0,0,3],"vYr4":[0,0,0,0],"v8":[0,0,0,0,0,0,0,3],"ytd":3,"ytdYr":0,"v26":[0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,3],"vYr26":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]},{"name":"ASKUL","v4":[0,3,1,0],"vYr4":[0,0,0,0],"v8":[0,0,0,0,0,3,1,0],"ytd":4,"ytdYr":4,"v26":[2,0,4,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,1,0],"vYr26":[1,2,0,1,1,0,0,1,0,1,1,0,0,1,0,0,0,0,4,0,0,0,0,0,0,0]},{"name":"MonotaRO","v4":[4,0,0,0],"vYr4":[0,0,3,0],"v8":[0,0,0,0,4,0,0,0],"ytd":4,"ytdYr":6,"v26":[0,0,0,0,0,0,0,0,0,9,0,0,7,0,0,10,0,0,0,0,0,0,4,0,0,0],"vYr26":[0,0,0,4,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,3,0,0,3,0]},{"name":"Costco","v4":[36,54,66,22],"vYr4":[1141,266,18,10],"v8":[113,41,158,120,36,54,66,22],"ytd":735,"ytdYr":2026,"v26":[25,12,26,19,44,78,154,40,18,23,270,71,54,281,39,23,6,125,113,41,158,120,36,54,66,22],"vYr26":[9,5,1,5,11,3,4,9,18,26,172,410,30,24,9,5,10,19,11,9,25,527,1141,266,18,10]}],"onlineYr4":[9,3,5,14],"onlineYtd":562,"onlineYtdYr":313,"sub26":[134,89,110,130,194,214,173,110,110,188,405,101,122,312,110,79,22,211,164,129,246,206,80,108,214,175],"subYr26":[66,99,101,51,147,107,94,79,89,116,384,617,320,120,60,35,42,125,43,53,63,655,1158,279,36,57]},{"name":"T3","sku":"A-SKU-0880","sub4":[7,9,9,6],"subYr4":[0,0,0,0],"sub8":[9,9,9,3,7,9,9,6],"subYr8":[0,0,0,0,0,0,0,0],"ytd":74,"ytdYr":0,"online4":[3,6,5,3],"retailers":[{"name":"Amazon","v4":[3,6,3,3],"vYr4":[0,0,0,0],"v8":[7,3,2,3,3,6,3,3],"ytd":39,"ytdYr":0,"v26":[2,2,3,4,4,7,1,2,4,2,2,19,16,1,8,1,2,9,7,3,2,3,3,6,3,3],"vYr26":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]},{"name":"Bic camera","v4":[1,2,4,2],"vYr4":[0,0,0,0],"v8":[2,3,3,0,1,2,4,2],"ytd":18,"ytdYr":0,"v26":[0,0,0,3,3,0,2,2,0,1,5,5,5,3,1,1,1,1,2,3,3,0,1,2,4,2],"vYr26":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]},{"name":"Yodobashi camera","v4":[1,0,0,0],"vYr4":[0,0,0,0],"v8":[0,0,2,0,1,0,0,0],"ytd":3,"ytdYr":0,"v26":[0,0,0,2,0,1,2,0,1,0,1,0,1,1,1,1,1,0,0,0,2,0,1,0,0,0],"vYr26":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]},{"name":"Edion","v4":[2,0,0,0],"vYr4":[0,0,0,0],"v8":[0,1,0,0,2,0,0,0],"ytd":4,"ytdYr":0,"v26":[0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,1,0,0,2,0,0,0],"vYr26":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]},{"name":"Joshin","v4":[0,1,0,1],"vYr4":[0,0,0,0],"v8":[0,0,0,0,0,1,0,1],"ytd":2,"ytdYr":0,"v26":[0,1,0,0,1,2,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1],"vYr26":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]},{"name":"MonotaRO","v4":[0,0,2,0],"vYr4":[0,0,0,0],"v8":[0,1,2,0,0,0,2,0],"ytd":5,"ytdYr":0,"v26":[0,0,3,2,0,0,0,1,0,0,0,0,4,7,0,0,0,0,0,1,2,0,0,0,2,0],"vYr26":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}],"onlineYr4":[0,0,0,0],"onlineYtd":45,"onlineYtdYr":0,"sub26":[3,3,21,13,12,11,7,7,5,3,9,25,27,16,11,4,4,13,9,9,9,3,7,9,9,6],"subYr26":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}],"dates26":["9/8","9/15","9/22","9/29","10/6","10/13","10/20","10/27","11/3","11/10","11/17","11/24","12/1","12/8","12/15","12/22","12/29","1/5","1/12","1/19","1/26","2/2","2/9","2/16","2/23","3/2"],"net26":[336,291,326,319,376,430,350,286,281,352,587,295,417,507,320,198,97,384,357,322,399,363,235,273,446,354],"netYr26":[220,239,217,121,441,289,253,217,248,250,578,782,518,310,219,109,94,258,221,164,136,792,1270,409,116,231]};
 (function(){
 'use strict';
 
@@ -328,8 +328,25 @@ function render(d){
     +'<div class="card '+(alerts.length>5?'r':'y')+'"><div class="lbl">'+t('alerts')+'</div><div class="val">'+alerts.length+'<span style="font-size:.65rem">'+t('items')+'</span></div><div class="sub fl">'+t('check')+'</div></div>'
     +'</div>';
 
-  // Chart
-  h+='<div class="section"><h2>'+t('chart')+'</h2><div class="chart-wrap"><canvas id="chart"></canvas></div></div>';
+  // Chart with tabs
+  h+='<div class="section">';
+  h+='<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;margin-bottom:.6rem">';
+  h+='<div class="tabs" style="margin-bottom:0"><button class="tab on" data-ct="overall">'+t('chart')+'</button><button class="tab" data-ct="product">'+(LANG==='en'?'📊 Product Chart':'📊 製品別チャート')+'</button></div>';
+  h+='<div id="chartControls" style="display:none;gap:.5rem;align-items:center;flex-wrap:wrap;font-size:.78rem">';
+  // Product select
+  h+='<select id="chartProd" style="background:var(--bg);color:var(--text);border:1px solid var(--border);border-radius:4px;padding:3px 6px;font-size:.78rem;font-family:inherit">';
+  d.categories.forEach(function(c){h+='<option value="'+c.name+'">'+c.name+'</option>';});
+  h+='</select>';
+  // Period select
+  h+='<select id="chartPeriod" style="background:var(--bg);color:var(--text);border:1px solid var(--border);border-radius:4px;padding:3px 6px;font-size:.78rem;font-family:inherit">';
+  h+='<option value="13">13'+(LANG==='en'?' weeks':'週')+'</option><option value="26">26'+(LANG==='en'?' weeks':'週')+'</option></select>';
+  // Retailer checkboxes
+  h+='<div id="chartRetailers" style="display:flex;gap:.4rem;flex-wrap:wrap"></div>';
+  h+='</div></div>';
+  h+='<div class="chart-wrap"><canvas id="chart"></canvas></div></div>';
+
+  // Store chart state
+  window._chartState={mode:'overall',prod:d.categories[0].name,period:13,retailers:[]};
 
   // Overall summary table
   h+='<div class="section"><h2>'+t('summary')+'</h2>';
@@ -424,10 +441,11 @@ function render(d){
 
   document.getElementById('app').innerHTML=h;
   drawChart(d.dates12,d.net12,d.netYr12);
+  setupChartTabs(d);
 
-  // Tab switching
-  document.querySelectorAll('.tab').forEach(function(b){b.addEventListener('click',function(){
-    document.querySelectorAll('.tab').forEach(function(tb){tb.classList.toggle('on',tb===b)});
+  // Product tab switching (not chart tabs)
+  document.querySelectorAll('#tabBar .tab').forEach(function(b){b.addEventListener('click',function(){
+    document.querySelectorAll('#tabBar .tab').forEach(function(tb){tb.classList.toggle('on',tb===b)});
     document.querySelectorAll('.panel').forEach(function(p){p.classList.toggle('on',p.id==='p-'+b.dataset.t)});
   })});
 
@@ -518,6 +536,139 @@ function drawChart(labels,data,dataYr){
   ctx.fillStyle='#3b82f6';ctx.fillText('● '+t('lgdThis'),w-pad.right-120,pad.top-6);
   ctx.fillStyle='#94a3b8';ctx.fillText('--- '+t('lgdLast'),w-pad.right-60,pad.top-6);
   ctx.fillStyle='#f59e0b';ctx.fillText('--- '+t('lgdAvg'),w-pad.right,pad.top-6);
+}
+
+// Product chart with multiple retailer lines
+var COLORS=['#3b82f6','#22c55e','#f59e0b','#ef4444','#a855f7','#ec4899','#14b8a6','#f97316','#6366f1','#84cc16'];
+
+function drawProductChart(d){
+  var st=window._chartState;
+  var cat=d.categories.find(function(c){return c.name===st.prod});
+  if(!cat)return;
+  var n=st.period,is26=n===26;
+  var labels=is26?(d.dates26||[]):(d.dates26||[]).slice(-13);
+  if(!labels.length) labels=d.dates12;
+
+  // Collect series: total + selected retailers
+  var series=[];
+  var totalData=is26?(cat.sub26||cat.sub8):(cat.sub26||cat.sub8).slice(-13);
+  if(totalData.length<n) totalData=cat.sub8.slice(-n);
+  series.push({name:t('total'),data:totalData,color:'#3b82f6',width:2.5,dash:[]});
+
+  st.retailers.forEach(function(rn,idx){
+    var ret=cat.retailers.find(function(r){return r.name===rn});
+    if(!ret)return;
+    var rd=is26?(ret.v26||ret.v8):(ret.v26||ret.v8).slice(-13);
+    if(rd.length<n) rd=ret.v8.slice(-n);
+    series.push({name:rn,data:rd,color:COLORS[(idx+1)%COLORS.length],width:1.8,dash:[]});
+  });
+
+  // Draw
+  var canvas=document.getElementById('chart');if(!canvas)return;
+  var ctx=canvas.getContext('2d'),container=canvas.parentElement;
+  var dpr=window.devicePixelRatio||1,w=container.clientWidth,h=container.clientHeight;
+  canvas.width=w*dpr;canvas.height=h*dpr;canvas.style.width=w+'px';canvas.style.height=h+'px';ctx.scale(dpr,dpr);
+  var pad={top:30,right:25,bottom:40,left:55},cw=w-pad.left-pad.right,ch=h-pad.top-pad.bottom;
+
+  // Find min/max across all series
+  var allV=[];
+  series.forEach(function(s){s.data.forEach(function(v){if(typeof v==='number')allV.push(v)})});
+  var mx=Math.max.apply(null,allV)*1.1||1,mn=Math.min.apply(null,allV.filter(function(v){return v>=0}))*0.8||0;
+  var rng=mx-mn||1;
+
+  // Grid
+  ctx.strokeStyle='#334155';ctx.lineWidth=.5;ctx.fillStyle='#94a3b8';ctx.font='10px system-ui';ctx.textAlign='right';
+  for(var i=0;i<=4;i++){var y=pad.top+(ch/4)*i,v=mx-(rng/4)*i;ctx.beginPath();ctx.moveTo(pad.left,y);ctx.lineTo(w-pad.right,y);ctx.stroke();ctx.fillText(Math.round(v),pad.left-6,y+3)}
+  // X labels
+  ctx.textAlign='center';var sx=cw/(labels.length-1||1);
+  labels.forEach(function(l,i){if(i%Math.ceil(labels.length/13)===0||i===labels.length-1)ctx.fillText(l,pad.left+sx*i,h-pad.bottom+18)});
+
+  // Draw each series
+  series.forEach(function(s){
+    if(!s.data||!s.data.length)return;
+    ctx.beginPath();ctx.strokeStyle=s.color;ctx.lineWidth=s.width;ctx.lineJoin='round';
+    if(s.dash.length)ctx.setLineDash(s.dash);else ctx.setLineDash([]);
+    s.data.forEach(function(v,i){
+      var x=pad.left+sx*i,y=pad.top+ch-((v-mn)/rng)*ch;
+      i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+    });
+    ctx.stroke();ctx.setLineDash([]);
+    // Points
+    s.data.forEach(function(v,i){
+      var x=pad.left+sx*i,y=pad.top+ch-((v-mn)/rng)*ch;
+      ctx.beginPath();ctx.arc(x,y,2.5,0,Math.PI*2);ctx.fillStyle=s.color;ctx.fill();
+    });
+  });
+
+  // Legend
+  ctx.font='9px system-ui';ctx.textAlign='left';
+  var lx=pad.left+10,ly=pad.top+2;
+  series.forEach(function(s,i){
+    ctx.fillStyle=s.color;
+    ctx.fillRect(lx,ly+i*14,12,3);
+    ctx.fillText(s.name,lx+16,ly+i*14+4);
+  });
+}
+
+function setupChartTabs(d){
+  // Chart tab switching
+  document.querySelectorAll('[data-ct]').forEach(function(b){
+    b.addEventListener('click',function(){
+      document.querySelectorAll('[data-ct]').forEach(function(tb){tb.classList.toggle('on',tb===b)});
+      var mode=b.dataset.ct;
+      window._chartState.mode=mode;
+      var ctrl=document.getElementById('chartControls');
+      if(mode==='product'){
+        ctrl.style.display='flex';
+        updateRetailerCheckboxes(d);
+        drawProductChart(d);
+      } else {
+        ctrl.style.display='none';
+        drawChart(d.dates12,d.net12,d.netYr12);
+      }
+    });
+  });
+
+  // Product select change
+  var prodSel=document.getElementById('chartProd');
+  if(prodSel) prodSel.addEventListener('change',function(){
+    window._chartState.prod=this.value;
+    window._chartState.retailers=[];
+    updateRetailerCheckboxes(d);
+    drawProductChart(d);
+  });
+
+  // Period select change
+  var periodSel=document.getElementById('chartPeriod');
+  if(periodSel) periodSel.addEventListener('change',function(){
+    window._chartState.period=parseInt(this.value);
+    drawProductChart(d);
+  });
+}
+
+function updateRetailerCheckboxes(d){
+  var cat=d.categories.find(function(c){return c.name===window._chartState.prod});
+  if(!cat)return;
+  var container=document.getElementById('chartRetailers');
+  if(!container)return;
+  container.innerHTML='';
+  window._chartState.retailers=[];
+  cat.retailers.forEach(function(r,i){
+    var id='cr_'+i;
+    var lbl=document.createElement('label');
+    lbl.style.cssText='display:flex;align-items:center;gap:2px;cursor:pointer;color:'+COLORS[(i+1)%COLORS.length]+';font-size:.75rem;padding:2px 5px;border:1px solid var(--border);border-radius:3px';
+    lbl.innerHTML='<input type="checkbox" id="'+id+'" style="width:12px;height:12px;accent-color:'+COLORS[(i+1)%COLORS.length]+'"> '+r.name;
+    container.appendChild(lbl);
+    var cb=lbl.querySelector('input');
+    cb.addEventListener('change',function(){
+      if(cb.checked){
+        window._chartState.retailers.push(r.name);
+      } else {
+        window._chartState.retailers=window._chartState.retailers.filter(function(n){return n!==r.name});
+      }
+      drawProductChart(DATA);
+    });
+  });
 }
 
 window.switchLang=function(lang){LANG=lang;render(DATA)};
