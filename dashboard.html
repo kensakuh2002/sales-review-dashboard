@@ -332,7 +332,7 @@ function render(d){
   h+='<div class="section">';
   h+='<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;margin-bottom:.6rem">';
   h+='<div class="tabs" style="margin-bottom:0"><button class="tab on" data-ct="overall">'+t('chart')+'</button><button class="tab" data-ct="product">'+(LANG==='en'?'📊 Product Chart':'📊 製品別チャート')+'</button></div>';
-  h+='<div id="chartControls" style="display:none;gap:.5rem;align-items:center;flex-wrap:wrap;font-size:.78rem">';
+  h+='<div id="chartControls" style="display:none;flex-direction:row;gap:.5rem;align-items:center;flex-wrap:wrap;font-size:.78rem">';
   // Product select
   h+='<select id="chartProd" style="background:var(--bg);color:var(--text);border:1px solid var(--border);border-radius:4px;padding:3px 6px;font-size:.78rem;font-family:inherit">';
   d.categories.forEach(function(c){h+='<option value="'+c.name+'">'+c.name+'</option>';});
@@ -341,8 +341,9 @@ function render(d){
   h+='<select id="chartPeriod" style="background:var(--bg);color:var(--text);border:1px solid var(--border);border-radius:4px;padding:3px 6px;font-size:.78rem;font-family:inherit">';
   h+='<option value="13">13'+(LANG==='en'?' weeks':'週')+'</option><option value="26">26'+(LANG==='en'?' weeks':'週')+'</option></select>';
   // Retailer checkboxes
-  h+='<label style="display:flex;align-items:center;gap:3px;font-size:.75rem;color:var(--accent);padding:2px 5px;border:1px solid var(--accent);border-radius:3px;cursor:pointer"><input type="checkbox" id="chartShowTotal" checked style="width:12px;height:12px;accent-color:var(--accent)"> '+(LANG==='en'?'Total':t('total'))+'</label>';
-h+='<div id="chartRetailers" style="display:flex;gap:.4rem;flex-wrap:wrap"></div>';
+  h+='<label style="display:inline-flex;align-items:center;gap:3px;font-size:.75rem;color:var(--accent);padding:2px 6px;border:1px solid var(--accent);border-radius:3px;cursor:pointer"><input type="checkbox" id="chartShowTotal" checked style="width:13px;height:13px;accent-color:var(--accent)"> '+(LANG==='en'?'Total':t('total'))+'</label>';
+h+='<span style="color:var(--border)">|</span>';
+h+='<div id="chartRetailers" style="display:inline-flex;gap:.4rem;flex-wrap:wrap"></div>';
   h+='</div></div>';
   h+='<div class="chart-wrap"><canvas id="chart"></canvas></div></div>';
 
@@ -547,21 +548,25 @@ function drawProductChart(d){
   var cat=d.categories.find(function(c){return c.name===st.prod});
   if(!cat)return;
   var n=st.period,is26=n===26;
-  var labels=is26?(d.dates26||[]):(d.dates26||[]).slice(-13);
+  var dates26=d.dates26||[];
+  var labels=is26?dates26:dates26.slice(-13);
   if(!labels.length) labels=d.dates12;
 
-  // Collect series: total + selected retailers
+  // Collect series
   var series=[];
-  var totalData=is26?(cat.sub26||cat.sub8):(cat.sub26||cat.sub8).slice(-13);
-  if(totalData.length<n) totalData=cat.sub8.slice(-n);
+  var sub26=cat.sub26||[];
+  var totalData=is26?sub26:sub26.slice(-13);
+  if(!totalData.length) totalData=cat.sub8;
   var showTotal=document.getElementById('chartShowTotal');
-  if(!showTotal||showTotal.checked) series.push({name:t('total'),data:totalData,color:'#3b82f6',width:2.5,dash:[]});
+  if(showTotal&&showTotal.checked) series.push({name:t('total'),data:totalData,color:'#3b82f6',width:2.5,dash:[]});
 
   st.retailers.forEach(function(rn,idx){
-    var ret=cat.retailers.find(function(r){return r.name===rn});
+    var ret=null;
+    for(var ri=0;ri<cat.retailers.length;ri++){if(cat.retailers[ri].name===rn){ret=cat.retailers[ri];break;}}
     if(!ret)return;
-    var rd=is26?(ret.v26||ret.v8):(ret.v26||ret.v8).slice(-13);
-    if(rd.length<n) rd=ret.v8.slice(-n);
+    var rv26=ret.v26||[];
+    var rd=is26?rv26:rv26.slice(-13);
+    if(!rd.length) rd=ret.v8;
     series.push({name:rn,data:rd,color:COLORS[(idx+1)%COLORS.length],width:1.8,dash:[]});
   });
 
